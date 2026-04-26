@@ -1,0 +1,18 @@
+{
+  "name": "setekad-booking",
+  "version": "1.0.0",
+  "description": "Sistem Tempahan Bilik Khas SeTEKAD",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "firebase": "^12.12.1"
+  },
+  "devDependencies": {
+    "vite": "^8.0.9"
+  }
+}
