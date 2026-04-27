@@ -234,8 +234,8 @@ window.renderJadual = function () {
       const booking = findBooking(selectedRoom, date, slot);
 
       if (date < today) {
-        td.className += " slot-disabled";
-        td.textContent = "LEPAS";
+td.className += " slot-disabled";
+td.innerHTML = "<span class='slot-muted'>—</span>";
       } else if (booking) {
         td.className += " jadual-booked booked";
         td.innerHTML =
@@ -248,8 +248,8 @@ window.renderJadual = function () {
         const slotStart = timeToMinutes(slot.start);
 
         if (date === today && slotStart < currentMinutes) {
-          td.className += " slot-disabled";
-          td.textContent = "LEPAS";
+td.className += " slot-disabled";
+td.innerHTML = "<span class='slot-muted'>—</span>";
         } else {
           const btn = document.createElement("button");
           btn.type = "button";
@@ -525,15 +525,6 @@ window.printJadual = function () {
   if (printMinggu) printMinggu.textContent = "MINGGU: " + minggu;
 
   window.print();
-};
-window.nextWeek = function () {
-  weekOffset++;
-  renderJadual();
-};
-
-window.prevWeek = function () {
-  weekOffset--;
-  renderJadual();
 };
 /* INIT */
 window.onload = function () {
