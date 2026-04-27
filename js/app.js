@@ -144,7 +144,7 @@ function getCurrentWeekDates() {
   const monday = new Date(today);
   const diff = today.getDay() === 0 ? -6 : 1 - today.getDay();
 
-  monday.setDate(today.getDate() + diff); // ❗ buang weekOffset
+monday.setDate(today.getDate() + diff);
 
   const dates = [];
 
