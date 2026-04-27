@@ -519,3 +519,191 @@ th:first-child {
     height: 34px;
   }
 }
+/* =========================
+   FINAL UI POLISH - MOBILE
+========================= */
+
+/* Overall app feel */
+body {
+  background: linear-gradient(180deg, #f8fafc 0%, #eef4ff 100%);
+}
+
+.main-header {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  backdrop-filter: blur(10px);
+}
+
+.card {
+  border-radius: 22px;
+}
+
+/* Tabs mobile premium */
+.tabs {
+  overflow-x: auto;
+  flex-wrap: nowrap;
+  padding-bottom: 8px;
+}
+
+.tab-btn {
+  white-space: nowrap;
+  min-width: fit-content;
+}
+
+/* Jadual toolbar */
+#jadual .form-group {
+  background: #f8fafc;
+  padding: 12px;
+  border-radius: 16px;
+  border: 1px solid var(--border);
+}
+
+/* Jadual table clean */
+#jadual table {
+  border-collapse: separate;
+  border-spacing: 0;
+}
+
+#jadual th {
+  background: #eff6ff;
+  color: #1e40af;
+  font-weight: 900;
+}
+
+#jadual td {
+  font-size: 12px;
+}
+
+/* Slot lepas: minimal */
+.slot-disabled {
+  background: #fff1f2 !important;
+}
+
+.slot-muted {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 26px;
+  height: 26px;
+  border-radius: 999px;
+  background: #ffe4e6;
+  color: #be123c;
+  font-weight: 900;
+}
+
+/* Available slot */
+.slot-btn {
+  height: 36px;
+  border-radius: 999px;
+  background: #eff6ff;
+  border: 1px solid #bfdbfe;
+  color: #1d4ed8;
+  font-size: 18px;
+  font-weight: 900;
+}
+
+.slot-btn:hover {
+  background: #dbeafe;
+}
+
+/* Booked slot: compact */
+.jadual-booked,
+.booked {
+  background: #dbeafe !important;
+  color: #1e3a8a;
+  font-size: 11px;
+  line-height: 1.25;
+}
+
+.jadual-booked strong {
+  display: block;
+  font-size: 11px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.jadual-booked small {
+  display: block;
+  font-size: 10px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* Rehat */
+.jadual-rehat,
+.rehat {
+  background: #fef3c7 !important;
+  color: #92400e;
+  font-size: 11px;
+}
+
+/* Mobile */
+@media (max-width: 700px) {
+  .main-header {
+    padding: 14px 16px;
+  }
+
+  .logo {
+    width: 46px;
+    height: 46px;
+  }
+
+  .main-header h1 {
+    font-size: 1rem;
+  }
+
+  .subtitle {
+    font-size: 0.78rem;
+  }
+
+  .container {
+    padding: 12px;
+  }
+
+  .card {
+    padding: 14px;
+    border-radius: 20px;
+  }
+
+  .section-header h2 {
+    font-size: 1.1rem;
+  }
+
+  .table-responsive {
+    border-radius: 18px;
+    box-shadow: 0 10px 24px rgba(15, 23, 42, 0.08);
+  }
+
+  table {
+    min-width: 760px;
+  }
+
+  th,
+  td {
+    padding: 8px 6px;
+  }
+
+  td:first-child,
+  th:first-child {
+    width: 105px;
+  }
+
+  .jadual-time-cell strong {
+    font-size: 11px;
+  }
+
+  .jadual-time-cell small {
+    font-size: 10px;
+  }
+
+  .slot-btn {
+    height: 32px;
+  }
+
+  .form-control {
+    font-size: 16px;
+  }
+}
