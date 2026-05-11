@@ -184,17 +184,27 @@
 
   <!-- REKOD -->
   <section id="senarai" class="tab-content card">
-    <h2>Rekod Tempahan</h2>
+    <h2>Rekod Penggunaan Bilik Khas</h2>
 
-    <div class="filters">
-      <input
-        type="text"
-        id="search"
-        placeholder="Cari..."
-        class="form-control"
-        oninput="renderSenaraiTempahan()"
-      >
-    </div>
+<div class="filters" style="display:grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap:12px; margin-bottom:14px;">
+  <select id="filter-bilik" class="form-control" onchange="renderSenaraiTempahan()">
+    <option value="">Semua Bilik</option>
+    <option>Makmal Komputer</option>
+    <option>Bilik Tayang</option>
+    <option>Bilik Gerakan</option>
+    <option>Bilik JQAF</option>
+    <option>Surau</option>
+    <option>Pusat Sumber</option>
+  </select>
+
+  <input
+    type="text"
+    id="search"
+    placeholder="Cari guru / kelas / tujuan..."
+    class="form-control"
+    oninput="renderSenaraiTempahan()"
+  >
+</div>
 
     <div class="table-responsive">
       <table>

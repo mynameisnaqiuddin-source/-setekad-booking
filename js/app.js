@@ -398,22 +398,29 @@ function listenRealtime() {
 /* REKOD */
 function renderBookings() {
   const tbody = document.getElementById("senarai-body");
-  const search = document.getElementById("search");
-  const keyword = search ? search.value.toLowerCase().trim() : "";
+const search = document.getElementById("search");
+const filterBilik = document.getElementById("filter-bilik");
+
+const keyword = search ? search.value.toLowerCase().trim() : "";
+const selectedBilik = filterBilik ? filterBilik.value : "";
 
   if (!tbody) return;
 
   tbody.innerHTML = "";
 
-  const filtered = allBookings.filter(function (b) {
-    return (
-      (b.tarikh || "").toLowerCase().includes(keyword) ||
-      (b.bilik || "").toLowerCase().includes(keyword) ||
-      (b.guru || "").toLowerCase().includes(keyword) ||
-      (b.kelas || "").toLowerCase().includes(keyword) ||
-      (b.tujuan || "").toLowerCase().includes(keyword)
-    );
-  });
+const filtered = allBookings.filter(function (b) {
+  const matchBilik = selectedBilik === "" || b.bilik === selectedBilik;
+
+  const matchKeyword =
+    keyword === "" ||
+    (b.tarikh || "").toLowerCase().includes(keyword) ||
+    (b.bilik || "").toLowerCase().includes(keyword) ||
+    (b.guru || "").toLowerCase().includes(keyword) ||
+    (b.kelas || "").toLowerCase().includes(keyword) ||
+    (b.tujuan || "").toLowerCase().includes(keyword);
+
+  return matchBilik && matchKeyword;
+});
 
   if (filtered.length === 0) {
     tbody.innerHTML =
