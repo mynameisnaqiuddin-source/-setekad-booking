@@ -286,10 +286,68 @@ window.quickFill = function (bilik, tarikh, mula, akhir) {
   document.getElementById("input-mula").value = mula;
   document.getElementById("input-akhir").value = akhir;
 
-  const guruInput = document.getElementById("input-guru");
+updateGuruOptions();
+
+const guruInput = document.getElementById("input-guru");
   if (guruInput) guruInput.focus();
 };
+const privilegedTeachers = [
+  "EN. WARDALIMATA BIN ABDULLAH",
+  "PN. MARIAM BINTI HJ JANIS",
+  "TN HJ. YUSOFF BIN HJ. ZAKARIA",
+  "EN. ZULKIFLI BIN IBRAHIM",
+  "EN. MUHAMMAD NAQIUDDIN BIN YUNOS",
+  "PN. WAN HABSAH BINTI WAN DAUD",
+  "PN. LIZA BINTI SALLEH"
+];
 
+function isPrivilegedTeacher(name) {
+  return privilegedTeachers.includes((name || "").toUpperCase());
+}
+
+function getWeekStart(dateStr) {
+  const d = new Date(dateStr);
+  const day = d.getDay();
+  const diff = day === 0 ? -6 : 1 - day;
+  d.setDate(d.getDate() + diff);
+
+  const year = d.getFullYear();
+  const month = String(d.getMonth() + 1).padStart(2, "0");
+  const date = String(d.getDate()).padStart(2, "0");
+
+  return `${year}-${month}-${date}`;
+}
+
+window.updateGuruOptions = function () {
+  const guruSelect = document.getElementById("input-guru");
+  const bilik = document.getElementById("input-bilik")?.value;
+  const tarikh = document.getElementById("input-tarikh")?.value;
+
+  if (!guruSelect || !bilik || !tarikh) return;
+
+  const weekStart = getWeekStart(tarikh);
+
+  Array.from(guruSelect.options).forEach(function (option) {
+    const guru = option.value || option.textContent;
+
+    if (!guru) return;
+
+    if (isPrivilegedTeacher(guru)) {
+      option.disabled = false;
+      return;
+    }
+
+    const count = allBookings.filter(function (b) {
+      return (
+        (b.guru || "").toUpperCase() === guru.toUpperCase() &&
+        b.bilik === bilik &&
+        getWeekStart(b.tarikh) === weekStart
+      );
+    }).length;
+
+    option.disabled = count >= 3;
+  });
+};
 /* SUBMIT BOOKING */
 window.submitBooking = async function (e) {
   e.preventDefault();
@@ -356,6 +414,23 @@ window.submitBooking = async function (e) {
     );
     return;
   }
+  if (!isPrivilegedTeacher(data.guru)) {
+
+  const weekStart = getWeekStart(data.tarikh);
+
+  const weeklyCount = allBookings.filter(function (b) {
+    return (
+      (b.guru || "").toUpperCase() === data.guru.toUpperCase() &&
+      b.bilik === data.bilik &&
+      getWeekStart(b.tarikh) === weekStart
+    );
+  }).length;
+
+  if (weeklyCount >= 3) {
+    alert("Guru ini telah mencapai had tempahan mingguan.");
+    return;
+  }
+}
 
   if (!confirm("Simpan tempahan ini?")) return;
 
@@ -363,6 +438,7 @@ window.submitBooking = async function (e) {
   document.getElementById("booking-form").reset();
   alert("Tempahan berjaya disimpan.");
 };
+
 
 /* DELETE */
 window.deleteBooking = async function (id) {
